@@ -1,6 +1,6 @@
-# Nail Salon Android App
+# Nail Salon Android App | Spring 2025 1st Place for 309
 
-An Android application for a nail salon booking system, featuring separate interfaces for customers and employees. Built with Java, Volley, and Material Components.
+An Android application for a nail salon booking system, featuring separate interfaces for customers and employees. Built with Java, Volley, and Material Components. 
 
 ## Features
 
@@ -89,53 +89,4 @@ com.example.androidexample
     ├── VolleySingleton.java          # Centralized request queue (if implemented)
     ├── WebSocketListener.java        # WebSocket event listener
     └── WebSocketManager.java         # WebSocket connection manager
-```
 
-## Dependencies
-
-Add the following to your `build.gradle` (app) dependencies:
-
-```groovy
-implementation 'com.android.volley:volley:1.2.1'
-implementation 'com.github.bumptech.glide:glide:4.12.0'
-implementation 'com.google.android.material:material:1.5.0'
-implementation 'de.hdodenhof:circleimageview:3.1.0'
-```
-
-## Setup & Running
-
-1. **Clone the repository**:
-
-   ```bash
-   git clone https://github.com/yourusername/nailsalon-android.git
-   cd nailsalon-android
-   ```
-2. **Open in Android Studio** and allow Gradle to sync.
-3. **Configure API endpoints**:
-
-   * Update base URLs in activities (e.g., `SERVER_LOGINURL`, `UPDATE_URL`).
-4. **Permissions**:
-
-   * Ensure Internet permission in `AndroidManifest.xml`:
-
-     ```xml
-     <uses-permission android:name="android.permission.INTERNET" />
-     ```
-5. **Run** on an emulator or physical device (min. SDK version based on `build.gradle`).
-
-## Configuration
-
-* **Backend**: The app expects a RESTful API at specified endpoints. Ensure the server is running and reachable.
-* **Server URLs**: Modify in each activity or centralize in a constants file.
-
-## Contributing
-
-1. Fork the repository.
-2. Create a feature branch: `git checkout -b feature/YourFeature`
-3. Commit your changes: `git commit -m "Add YourFeature"`
-4. Push to the branch: `git push origin feature/YourFeature`
-5. Open a pull request.
-
-## License
-
-This project is licensed under the MIT License. See `LICENSE.md` for details.
