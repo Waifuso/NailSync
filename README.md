@@ -26,7 +26,7 @@ Used S3 buckets, mediapipe handlandmarker model, and springboot framework.
 * **Upcoming Appointments**: Scrollable list of scheduled appointments.
 * **Profile Management**: View and edit employee profile, including photo upload.
 * **Training Videos**: Play and track completion of training videos.
-* **Placeholder Screens**: Appointments detail, messages, and inventory (to be implemented).
+* **Placeholder Screens**: Appointments detail, messages, and inventory.
 
 ## Architecture & Technologies
 
@@ -35,7 +35,6 @@ Used S3 buckets, mediapipe handlandmarker model, and springboot framework.
 * **Image Loading**: Glide for profile images and video thumbnails
 * **UI & Layout**: AndroidX, Material Components (Toolbar, BottomNavigationView, Material Buttons)
 * **Custom Views**: RecyclerView, CardView, CircleImageView
-* **Persistence**: SharedPreferences wrapped by `PrefManager`
 
 ## Project Structure
 
