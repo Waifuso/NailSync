@@ -1,0 +1,269 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > MessageAnalyze</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">phong.demo.Service</a>
+</div>
+
+<h1>Coverage Summary for Class: MessageAnalyze (phong.demo.Service)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MessageAnalyze</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (5/5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    88.5%
+  </span>
+  <span class="absValue">
+    (23/26)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (55/55)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package phong.demo.Service;
+&nbsp;
+&nbsp;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.stereotype.Service;
+&nbsp;import phong.demo.DTO.Service_DTO;
+&nbsp;import phong.demo.Entity.Appointment;
+&nbsp;import phong.demo.Entity.User;
+&nbsp;import phong.demo.Repository.UserRepository;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.util.*;
+&nbsp;import java.util.stream.Collectors;
+&nbsp;
+&nbsp;@Service
+<b class="fc">&nbsp;public class MessageAnalyze {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private  EmployeeService employeeService;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private  Serviceservice serviceservice;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private UserRepository userRepository;
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;    private final Logger logger = LoggerFactory.getLogger(MessageAnalyze.class);</b>
+&nbsp;
+&nbsp;    public String Analyze(String message) {
+&nbsp;        // the list of employee name
+<b class="fc">&nbsp;        List&lt;String&gt; employees = employeeService.getAllEmployeename();</b>
+&nbsp;
+&nbsp;        // the list of service name
+<b class="fc">&nbsp;        List&lt;String&gt; services = serviceservice.getServicenameList();</b>
+&nbsp;
+&nbsp;        // the map of key is employee and value is type of service
+<b class="fc">&nbsp;        Map&lt;String, List&lt;Service_DTO&gt;&gt; EmployeeAndService = employeeService.getEmployeeAndService();</b>
+&nbsp;
+&nbsp;        // the map of the key is service and the value is the name of people of provide that service
+<b class="fc">&nbsp;        Map&lt;String, List&lt;String&gt;&gt; ServiceAndEmployee = serviceservice.getServiceAndEmployee();</b>
+&nbsp;
+&nbsp;        // the list of possible ask for service
+<b class="fc">&nbsp;        List&lt;String&gt; ArraystringofPossibleListforService = List.of(&quot;price list&quot;, &quot;price&quot;, &quot;service&quot;, &quot;services&quot;, &quot;spa service&quot;, &quot;service?&quot;,&quot;offers&quot;,&quot;offer&quot;);</b>
+<b class="fc">&nbsp;        Set&lt;String&gt; SetstringofPossibleListforService = new HashSet&lt;&gt;(ArraystringofPossibleListforService);</b>
+&nbsp;
+<b class="fc">&nbsp;        List&lt;String&gt; stringofPossibleListforEmployee = List.of(&quot;employee&quot;,&quot;staff&quot;);</b>
+<b class="fc">&nbsp;        boolean EmployeeMentioned = false;</b>
+&nbsp;
+<b class="fc">&nbsp;        boolean ServiceMenttioned = false;</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        String cleaned = message</b>
+<b class="fc">&nbsp;                .toLowerCase()</b>
+&nbsp;                // replace every non-letter/digit/space with a space
+<b class="fc">&nbsp;                .replaceAll(&quot;[^a-z0-9\\s]&quot;, &quot; &quot;)</b>
+<b class="fc">&nbsp;                .trim()</b>
+<b class="fc">&nbsp;                .replaceAll(&quot;\\s+&quot;, &quot; &quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        String[] tokens =cleaned.split(&quot; &quot;);</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; tokens.length;i++){</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        for (String word:tokens){</b>
+&nbsp;
+<b class="pc">&nbsp;            if (SetstringofPossibleListforService.contains(word) || services.contains(word)){</b>
+&nbsp;
+<b class="fc">&nbsp;                ServiceMenttioned = true;</b>
+<b class="fc">&nbsp;            } else if (employees.stream().map(h -&gt; h.toLowerCase()).collect(Collectors.toList()).contains(word)) {</b>
+&nbsp;
+<b class="fc">&nbsp;                EmployeeMentioned = true;</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            if (ServiceMenttioned == true &amp;&amp; EmployeeMentioned == true){</b>
+&nbsp;
+&nbsp;                break;
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        if(ServiceMenttioned == true &amp;&amp; EmployeeMentioned == true){</b>
+&nbsp;
+<b class="fc">&nbsp;            return  EmployeeAndService.entrySet().stream()</b>
+<b class="fc">&nbsp;                    .map(e -&gt;</b>
+<b class="fc">&nbsp;                            e.getKey()</b>
+&nbsp;                                    + &quot; has those service: &quot;
+<b class="fc">&nbsp;                                    + e.getValue().stream()</b>
+<b class="fc">&nbsp;                                    .map(Service_DTO::getService_name)</b>
+<b class="fc">&nbsp;                                    .collect(Collectors.joining(&quot;, &quot;))</b>
+&nbsp;                    )
+<b class="fc">&nbsp;                    .collect(Collectors.joining(&quot; | &quot;));</b>
+&nbsp;
+<b class="pc">&nbsp;        }else if(ServiceMenttioned == true &amp;&amp; EmployeeMentioned == false){</b>
+&nbsp;
+<b class="fc">&nbsp;            String csv = EmployeeAndService.entrySet().stream()</b>
+<b class="fc">&nbsp;                    .map(e -&gt;</b>
+<b class="fc">&nbsp;                            e.getKey()</b>
+&nbsp;                                    + &quot; has those service: &quot;
+<b class="fc">&nbsp;                                    + e.getValue().stream()</b>
+<b class="fc">&nbsp;                                    .map(Service_DTO::getService_name)</b>
+<b class="fc">&nbsp;                                    .collect(Collectors.joining(&quot;, &quot;))</b>
+&nbsp;                    )
+<b class="fc">&nbsp;                    .collect(Collectors.joining(&quot; | &quot;));</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;            String servicelistToString = String.valueOf(serviceservice.getServiceList().stream().map(Service_DTO::toString).collect(Collectors.toList()));</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;            logger.info(servicelistToString);</b>
+<b class="fc">&nbsp;            return &quot; if the user ask for service only here is the list of service we have : &quot; + servicelistToString</b>
+&nbsp;
+&nbsp;                    +&quot;if the user might mention the name of someone but the analyze system can not detect the employee name in database &quot; +
+&nbsp;
+&nbsp;                    &quot; Here is the other option they can choose : &quot; + csv;
+&nbsp;
+<b class="pc">&nbsp;        }else if(ServiceMenttioned == false &amp;&amp; EmployeeMentioned == true){</b>
+&nbsp;
+<b class="fc">&nbsp;            return &quot;if the user ask about employee here is the list of employee we have &quot; + employees;</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return &quot; if the user ask about appoinment time direct them to the left side of the screen after log in&quot;</b>
+&nbsp;                + &quot;other than that answer normally&quot;+ &quot;here is extra information in case the analyze error &quot; +
+<b class="fc">&nbsp;                &quot;service: &quot; + services.toString() +&quot;employee&quot; + employees.toString();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * the function is
+&nbsp;     * @param id
+&nbsp;     * @return
+&nbsp;     */
+&nbsp;    public String extraInformationUser(long id ){
+&nbsp;
+<b class="fc">&nbsp;        Optional&lt;User&gt; userOptional = userRepository.findById(id);</b>
+&nbsp;
+<b class="fc">&nbsp;        User user = userOptional.get();</b>
+&nbsp;
+<b class="fc">&nbsp;        List&lt;Appointment&gt;  appointments = user.getAppointmentList().stream().filter(appointment -&gt; appointment.getDate().equals(LocalDate.now())).collect(Collectors.toList());</b>
+&nbsp;
+<b class="fc">&nbsp;        String CustomerInformation = &quot;You are currently talking with the customer name &quot; + user.getUsername()</b>
+<b class="fc">&nbsp;                + &quot; their current Ranking is &quot; + user.getProfile().getRanking() + &quot; their current point is &quot;</b>
+<b class="fc">&nbsp;                + user.getProfile().getTotalPoints()  + &quot; here is the list of their appointmnet for today&quot; +</b>
+<b class="fc">&nbsp;                appointments.toString() ;</b>
+&nbsp;
+<b class="fc">&nbsp;        return CustomerInformation;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-05-08 04:06</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,311 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Employee</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">phong.demo.Entity</a>
+</div>
+
+<h1>Coverage Summary for Class: Employee (phong.demo.Entity)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Employee</td>
+<td class="coverageStat">
+  <span class="percent">
+    82.8%
+  </span>
+  <span class="absValue">
+    (24/29)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.8%
+  </span>
+  <span class="absValue">
+    (31/37)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Employee$HibernateInstantiator$4soedd1X</td>
+  </tr>
+  <tr>
+    <td class="name">Employee$HibernateInstantiator$er2N7Nbo</td>
+  </tr>
+  <tr>
+    <td class="name">Employee$HibernateProxy$exTgTtLV</td>
+  </tr>
+  <tr>
+    <td class="name">Employee$HibernateProxy$LQq5f98K</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    82.8%
+  </span>
+  <span class="absValue">
+    (24/29)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    83.8%
+  </span>
+  <span class="absValue">
+    (31/37)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package phong.demo.Entity;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonIgnore;
+&nbsp;import com.fasterxml.jackson.annotation.JsonManagedReference;
+&nbsp;import jakarta.persistence.*;
+&nbsp;import phong.demo.DTO.Service_DTO;
+&nbsp;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.util.ArrayList;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Entity
+&nbsp;@Table(name = &quot;employees&quot;)
+&nbsp;public class Employee {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+&nbsp;
+&nbsp;    private long employee_id;
+&nbsp;
+&nbsp;    @OneToMany(mappedBy = &quot;employee&quot;, cascade = CascadeType.ALL)
+&nbsp;    @JsonManagedReference(&quot;employee-appointmentService&quot;)
+&nbsp;    private List&lt;AppointmentService&gt; appointmentServices;
+&nbsp;
+&nbsp;    @OneToMany(mappedBy = &quot;employee&quot;, cascade = CascadeType.ALL)
+&nbsp;    @JsonManagedReference(&quot;timeFrame-employee&quot;)
+&nbsp;    private List&lt;TimeFrame&gt; timeFrame;
+&nbsp;
+&nbsp;    @OneToMany(mappedBy = &quot;employee&quot;, cascade = CascadeType.ALL)
+&nbsp;    @JsonManagedReference(&quot;employee-payment&quot;)
+&nbsp;    private List&lt;Payment&gt; payments;
+&nbsp;
+&nbsp;
+&nbsp;    @OneToMany(mappedBy = &quot;employee&quot;, cascade = CascadeType.ALL)
+&nbsp;    @JsonManagedReference(&quot;employee-EmployeeDailyFinance&quot;)
+&nbsp;    private List&lt;EmployeeDailyFinance&gt; employeeDailyFinances;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    private String username;
+&nbsp;
+&nbsp;    private String email;
+&nbsp;
+&nbsp;    private String servicePassword;
+&nbsp;
+&nbsp;    private boolean available;
+&nbsp;
+&nbsp;    private LocalDate Dob;
+&nbsp;
+<b class="fc">&nbsp;    @OneToMany(mappedBy = &quot;employee&quot;, cascade = CascadeType.ALL, orphanRemoval = true)</b>
+&nbsp;    @JsonManagedReference(&quot;handler-employee&quot;)
+&nbsp;    private List&lt;Handler&gt; Employee_Handler = new ArrayList&lt;&gt;();
+&nbsp;
+&nbsp;    // default constructor
+<b class="fc">&nbsp;    public Employee() {</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public Employee(String username, String servicePassword, String email, boolean available, LocalDate dob) {</b>
+&nbsp;
+<b class="fc">&nbsp;        this.username = username;</b>
+&nbsp;
+<b class="fc">&nbsp;        this.servicePassword = servicePassword;</b>
+&nbsp;
+<b class="fc">&nbsp;        this.email = email;</b>
+&nbsp;
+<b class="fc">&nbsp;        this.available = available;</b>
+&nbsp;
+<b class="fc">&nbsp;        Dob = dob;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long getId() {
+<b class="fc">&nbsp;        return employee_id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setId(long id) {
+<b class="fc">&nbsp;        this.employee_id = id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getUsername() {
+<b class="fc">&nbsp;        return username;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setUsername(String username) {
+<b class="fc">&nbsp;        this.username = username;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getServicePassword() {
+<b class="fc">&nbsp;        return servicePassword;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setServicePassword(String servicePassword) {
+<b class="fc">&nbsp;        this.servicePassword = servicePassword;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getEmail() {
+<b class="fc">&nbsp;        return email;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setEmail(String email) {
+<b class="fc">&nbsp;        this.email = email;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isAvailable() {
+<b class="fc">&nbsp;        return available;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAvailable(boolean available) {
+<b class="fc">&nbsp;        this.available = available;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public LocalDate getDob() {
+<b class="fc">&nbsp;        return Dob;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setDob(LocalDate dob) {
+<b class="fc">&nbsp;        Dob = dob;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public long getEmployee_id() {
+<b class="fc">&nbsp;        return employee_id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setEmployee_id(long employee_id) {
+<b class="fc">&nbsp;        this.employee_id = employee_id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;Handler&gt; getEmployee_Handler() {
+<b class="fc">&nbsp;        return Employee_Handler;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setEmployee_Handler(List&lt;Handler&gt; employee_Handler) {
+<b class="fc">&nbsp;        Employee_Handler = employee_Handler;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void Add_Handler(Handler handler){
+&nbsp;
+<b class="fc">&nbsp;        Employee_Handler.add(handler);</b>
+&nbsp;
+<b class="fc">&nbsp;        handler.setEmployee(this);</b>
+&nbsp;    }
+&nbsp;    public void Remove_Handler(Handler handler){
+&nbsp;
+<b class="nc">&nbsp;        Employee_Handler.remove(handler);</b>
+&nbsp;
+<b class="nc">&nbsp;        handler.setEmployee(null);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void Add_Servive(Service service){
+&nbsp;
+<b class="fc">&nbsp;        Employee_Handler.add(new Handler(this,service));</b>
+&nbsp;
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;AppointmentService&gt; getAppointmentServices() {
+<b class="fc">&nbsp;        return appointmentServices;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAppointmentServices(List&lt;AppointmentService&gt; appointmentServices) {
+<b class="fc">&nbsp;        this.appointmentServices = appointmentServices;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;TimeFrame&gt; getTimeFrame() {
+<b class="fc">&nbsp;        return timeFrame;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setTimeFrame(List&lt;TimeFrame&gt; timeFrame) {
+<b class="fc">&nbsp;        this.timeFrame = timeFrame;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;Payment&gt; getPayments() {
+<b class="nc">&nbsp;        return payments;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPayments(List&lt;Payment&gt; payments) {
+<b class="nc">&nbsp;        this.payments = payments;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;EmployeeDailyFinance&gt; getEmployeeDailyFinances() {
+<b class="nc">&nbsp;        return employeeDailyFinances;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setEmployeeDailyFinances(List&lt;EmployeeDailyFinance&gt; employeeDailyFinances) {
+<b class="nc">&nbsp;        this.employeeDailyFinances = employeeDailyFinances;</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-05-08 04:06</div>
+</div>
+</body>
+</html>

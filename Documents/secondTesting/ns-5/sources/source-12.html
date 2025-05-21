@@ -1,0 +1,214 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > Service</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">phong.demo.Entity</a>
+</div>
+
+<h1>Coverage Summary for Class: Service (phong.demo.Entity)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Service</td>
+<td class="coverageStat">
+  <span class="percent">
+    69.2%
+  </span>
+  <span class="absValue">
+    (9/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    73.3%
+  </span>
+  <span class="absValue">
+    (11/15)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Service$HibernateInstantiator$OAjg96lk</td>
+  </tr>
+  <tr>
+    <td class="name">Service$HibernateInstantiator$UNGjW0RS</td>
+  </tr>
+  <tr>
+    <td class="name">Service$HibernateProxy$4i8ZNcCm</td>
+  </tr>
+  <tr>
+    <td class="name">Service$HibernateProxy$DQRK0ubz</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    69.2%
+  </span>
+  <span class="absValue">
+    (9/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    73.3%
+  </span>
+  <span class="absValue">
+    (11/15)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package phong.demo.Entity;
+&nbsp;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonIgnore;
+&nbsp;import com.fasterxml.jackson.annotation.JsonManagedReference;
+&nbsp;import jakarta.persistence.*;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;@Entity
+&nbsp;@Table(name = &quot;Service&quot;)
+<b class="fc">&nbsp;public class Service {</b>
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+&nbsp;    private long id;
+&nbsp;
+&nbsp;    private String serviceName;
+&nbsp;
+&nbsp;    //CuaNu
+&nbsp;    @OneToMany (mappedBy = &quot;service&quot;, cascade = CascadeType.ALL)
+&nbsp;    @JsonManagedReference(&quot;service-appointmentService&quot;)
+&nbsp;    private List&lt;AppointmentService&gt; appointmentServices;
+&nbsp;
+&nbsp;    @OneToMany(mappedBy = &quot;service&quot;, cascade = CascadeType.ALL)
+&nbsp;    @JsonManagedReference(&quot;service-paymentService&quot;)
+&nbsp;    private List&lt;PaymentService&gt; paymentServices;
+&nbsp;
+&nbsp;
+&nbsp;    private Integer price;
+&nbsp;
+<b class="fc">&nbsp;    private int duration = 0;</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;    @OneToMany(mappedBy = &quot;service&quot;, cascade = CascadeType.ALL, orphanRemoval = true)</b>
+&nbsp;    @JsonManagedReference(&quot;service-Handler&quot;)
+&nbsp;    private List&lt;Handler&gt; Service_Handler = new ArrayList&lt;&gt;();
+&nbsp;
+&nbsp;    public long getId() {
+<b class="fc">&nbsp;        return id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setId(long id) {
+<b class="fc">&nbsp;        this.id = id;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public String getService_name() {
+<b class="fc">&nbsp;        return serviceName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setService_name(String service_name) {
+<b class="fc">&nbsp;        this.serviceName = service_name;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Integer getPrice() {
+<b class="fc">&nbsp;        return price;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setPrice(Integer price) {
+<b class="fc">&nbsp;        this.price = price;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;Handler&gt; getService_Handler() {
+<b class="nc">&nbsp;        return Service_Handler;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setService_Handler(List&lt;Handler&gt; service_Handler) {
+<b class="nc">&nbsp;        Service_Handler = service_Handler;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;AppointmentService&gt; getAppointmentServices() {
+<b class="nc">&nbsp;        return appointmentServices;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setAppointmentServices(List&lt;AppointmentService&gt; appointmentServices) {
+<b class="nc">&nbsp;        this.appointmentServices = appointmentServices;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getDuration() {
+<b class="fc">&nbsp;        return duration;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setDuration(int duration) {
+<b class="fc">&nbsp;        this.duration = duration;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;}
+&nbsp;
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-05-08 04:06</div>
+</div>
+</body>
+</html>

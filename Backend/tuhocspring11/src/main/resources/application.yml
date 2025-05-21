@@ -1,0 +1,21 @@
+spring:
+  cloud:
+    aws:
+      credentials:
+        access-key: AKIAYNQEMGL5UACFAVMA
+        secret-key: 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
+      region:
+        static: us-east-1            # US-East (N. Virginia)
+      stack:
+        auto: false
+
+  servlet:
+    multipart:
+      enabled: true
+      file-size-threshold: 2MB
+      max-file-size: 5MB
+      max-request-size: 10MB
+
+application:
+  bucket:
+    name: coms309swas

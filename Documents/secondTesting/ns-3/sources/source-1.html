@@ -1,0 +1,416 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > AppointmentController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">phong.demo.Controller</a>
+</div>
+
+<h1>Coverage Summary for Class: AppointmentController (phong.demo.Controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">AppointmentController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85.7%
+  </span>
+  <span class="absValue">
+    (6/7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    89.3%
+  </span>
+  <span class="absValue">
+    (25/28)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    95.4%
+  </span>
+  <span class="absValue">
+    (104/109)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package phong.demo.Controller;
+&nbsp;
+&nbsp;
+&nbsp;import com.fasterxml.jackson.annotation.JsonIgnore;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.http.ResponseEntity;
+&nbsp;import org.springframework.messaging.MessagingException;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;import phong.demo.DTO.AppointmentDetailsDTO;
+&nbsp;import phong.demo.DTO.BookingDTO;
+&nbsp;import phong.demo.Entity.*;
+&nbsp;import phong.demo.Repository.*;
+&nbsp;import phong.demo.Service.ProfileService;
+&nbsp;import phong.demo.Service.TimeframeService;
+&nbsp;import phong.demo.Springpro.RandomNumberService;
+&nbsp;import phong.demo.Springpro.ResponseMessagge;
+&nbsp;import phong.demo.Springpro.SendEmailService;
+&nbsp;
+&nbsp;
+&nbsp;import java.time.Duration;
+&nbsp;import java.time.LocalDate;
+&nbsp;import java.time.LocalTime;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Optional;
+&nbsp;
+&nbsp;@RestController
+&nbsp;@RequestMapping(path = &quot;/api/appointments&quot;)
+&nbsp;public class AppointmentController {
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private final AppointmentRepository appointmentRepository;
+&nbsp;    private final EmployeeReposittory employeeReposittory;
+&nbsp;    private final ServiceRepository serviceRepository;
+&nbsp;    private final UserRepository userRepository;
+&nbsp;    private final HandlerRepository handlerRepository;
+&nbsp;    private final AppointmentServiceRepository appointmentServiceRepository;
+&nbsp;    private TimeframeService timeframeService;
+&nbsp;    private final TimeFrameRepository timeFrameRepository;
+&nbsp;    private final SmallTimeFrameRepository smallTimeFrameRepository;
+&nbsp;    private RandomNumberService randomNumberService;
+&nbsp;    private SendEmailService sendEmailService;
+&nbsp;    private ProfileService profileService;
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;    private final Logger logger = LoggerFactory.getLogger(AppointmentController.class);</b>
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;    public AppointmentController(AppointmentRepository appointmentRepository, EmployeeReposittory employeeReposittory, ServiceRepository serviceRepository, UserRepository userRepository, HandlerRepository handlerRepository, AppointmentServiceRepository appointmentServiceRepository, TimeframeService timeframeService, TimeFrameRepository timeFrameRepository, SmallTimeFrameRepository smallTimeFrameRepository, RandomNumberService randomNumberService, SendEmailService sendEmailService,ProfileService profileService ) {</b>
+<b class="fc">&nbsp;        this.appointmentRepository = appointmentRepository;</b>
+<b class="fc">&nbsp;        this.employeeReposittory = employeeReposittory;</b>
+<b class="fc">&nbsp;        this.serviceRepository = serviceRepository;</b>
+<b class="fc">&nbsp;        this.userRepository = userRepository;</b>
+<b class="fc">&nbsp;        this.handlerRepository = handlerRepository;</b>
+<b class="fc">&nbsp;        this.appointmentServiceRepository = appointmentServiceRepository;</b>
+<b class="fc">&nbsp;        this.timeframeService = timeframeService;</b>
+<b class="fc">&nbsp;        this.timeFrameRepository = timeFrameRepository;</b>
+<b class="fc">&nbsp;        this.smallTimeFrameRepository = smallTimeFrameRepository;</b>
+<b class="fc">&nbsp;        this.randomNumberService = randomNumberService;</b>
+<b class="fc">&nbsp;        this.sendEmailService = sendEmailService;</b>
+<b class="fc">&nbsp;        this.profileService = profileService;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(path = &quot;/info/{date}&quot;)
+&nbsp;    public List&lt;Appointment&gt; getAllAppointment(){
+<b class="nc">&nbsp;        return appointmentRepository.findAll();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(path = &quot;/infoSerandEm&quot;)
+&nbsp;    @JsonIgnore
+&nbsp;    public List&lt;AppointmentService&gt; getAllInfo() {
+<b class="fc">&nbsp;        return appointmentServiceRepository.findAll();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(&quot;/user/{userId}&quot;)
+&nbsp;    public ResponseEntity&lt;?&gt; getAppointmentByUserId(@PathVariable Long userId) {
+<b class="fc">&nbsp;        List&lt;Appointment&gt; CurUserId = appointmentRepository.findAllByUserId(userId);</b>
+<b class="fc">&nbsp;        if (CurUserId.isEmpty()) {</b>
+<b class="fc">&nbsp;            return ResponseEntity.badRequest().body(new ResponseMessagge(&quot;There are no appointments&quot;));</b>
+&nbsp;        }
+<b class="fc">&nbsp;        List&lt;AppointmentDetailsDTO&gt; result = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;        for (Appointment id : CurUserId) {</b>
+<b class="fc">&nbsp;            List&lt;Long&gt; serviceIDD = new ArrayList&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;            List&lt;AppointmentService&gt; appointmentServices = appointmentServiceRepository.findByAppointmentId(id.getId());</b>
+&nbsp;
+<b class="fc">&nbsp;            String employeeName = &quot;&quot;;</b>
+&nbsp;
+<b class="fc">&nbsp;            for (AppointmentService appService : appointmentServices) {</b>
+&nbsp;
+<b class="fc">&nbsp;                serviceIDD.add(appService.getService().getId());</b>
+<b class="fc">&nbsp;                employeeName = appService.getEmployee().getUsername();</b>
+&nbsp;
+&nbsp;            }
+<b class="fc">&nbsp;            result.add(new AppointmentDetailsDTO(id, serviceIDD, employeeName));</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        return ResponseEntity.ok(result);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    @PostMapping(path = &quot;/booking&quot;)
+&nbsp;    public ResponseEntity&lt;?&gt; bookingAppointment (@RequestBody BookingDTO bookingDTO) {
+&nbsp;
+<b class="fc">&nbsp;        Optional&lt;User&gt; existingID = userRepository.findById(bookingDTO.getUserId());</b>
+<b class="fc">&nbsp;        if (existingID.isEmpty()) {</b>
+<b class="fc">&nbsp;            return ResponseEntity.badRequest().body(new ResponseMessagge(&quot;User not found&quot;));</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        User user = existingID.get();</b>
+&nbsp;
+&nbsp;
+&nbsp;//        if (bookingDTO.getServiceId().size() != bookingDTO.getEmployeeId().size()) {
+&nbsp;//            return ResponseEntity.badRequest().body(new ResponseMessagge(&quot;Mismatch between number of services and assigned employees.&quot;));
+&nbsp;//        }
+&nbsp;
+<b class="fc">&nbsp;        Optional&lt;Employee&gt; existingEm = employeeReposittory.findById(bookingDTO.getEmployeeId());</b>
+&nbsp;
+<b class="fc">&nbsp;        if (existingEm.isEmpty()) {</b>
+<b class="fc">&nbsp;            return ResponseEntity.badRequest().body(new ResponseMessagge(&quot;The employee not found&quot;));</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Employee employee1 = existingEm.get();</b>
+&nbsp;
+<b class="fc">&nbsp;        List&lt;Service&gt; existingSer = serviceRepository.findAllById(bookingDTO.getServiceId());</b>
+<b class="fc">&nbsp;        if (existingSer.size() != bookingDTO.getServiceId().size()) {</b>
+<b class="fc">&nbsp;            return ResponseEntity.badRequest().body(new ResponseMessagge(&quot;One or more services not found&quot;));</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;        //timeframeService.checkTimeframe(employee1, bookingDTO.getTime(), bookingDTO.getTime(), bookingDTO.getDate());
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        Appointment appointment = new Appointment();</b>
+<b class="fc">&nbsp;        appointment.setUser(user);</b>
+<b class="fc">&nbsp;        appointment.setDate(bookingDTO.getDate());</b>
+<b class="fc">&nbsp;        appointment.setStartTime(bookingDTO.getTime());</b>
+&nbsp;
+<b class="fc">&nbsp;        int totalTime = existingSer.stream()</b>
+<b class="fc">&nbsp;                .mapToInt(Service::getDuration)      // get time</b>
+<b class="fc">&nbsp;                .sum();                        // sum them</b>
+<b class="fc">&nbsp;        appointment.setEndTime(appointment.getStartTime().plusMinutes(totalTime));</b>
+&nbsp;
+<b class="pc">&nbsp;        if(!timeframeService.checkTimeframe(employee1, appointment.getStartTime(), appointment.getEndTime(), appointment.getDate())) {</b>
+&nbsp;
+&nbsp;            //appointment.setStatus(&quot;Declined&quot;);
+&nbsp;            //appointmentRepository.save(appointment);
+<b class="nc">&nbsp;            return ResponseEntity.badRequest().body(new ResponseMessagge(&quot;Conflicted hours&quot;));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        List &lt;AppointmentService&gt; appointmentServices = new ArrayList&lt;&gt;();</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; existingSer.size(); i++) {</b>
+<b class="fc">&nbsp;            Long serviceId = bookingDTO.getServiceId().get(i);</b>
+<b class="fc">&nbsp;            Optional&lt;Handler&gt; handler = handlerRepository.findByServiceIdAndEmployeeId(serviceId, employee1.getEmployee_id());</b>
+&nbsp;
+<b class="pc">&nbsp;            if (handler.isEmpty()) {</b>
+<b class="nc">&nbsp;                return ResponseEntity.badRequest().body(new ResponseMessagge(&quot;Employee ID&quot; + employee1.getEmployee_id() + &quot; is not allowed to perform Service ID &quot; + serviceId));</b>
+&nbsp;            }
+&nbsp;
+<b class="fc">&nbsp;            AppointmentService appointmentService = new AppointmentService();</b>
+<b class="fc">&nbsp;            appointmentService.setAppointment(appointment);</b>
+<b class="fc">&nbsp;            appointmentService.setService(existingSer.get(i));</b>
+<b class="fc">&nbsp;            appointmentService.setEmployee(employee1);</b>
+&nbsp;
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;            appointmentServices.add(appointmentService);</b>
+&nbsp;
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        Optional&lt;TimeFrame&gt; optionalTimeFrame = timeFrameRepository.findByDateAndEmployeeId(bookingDTO.getDate(), employee1.getEmployee_id());</b>
+&nbsp;
+<b class="fc">&nbsp;        TimeFrame timeFrame = optionalTimeFrame.get();</b>
+&nbsp;
+<b class="pc">&nbsp;        if (optionalTimeFrame.isPresent()) {</b>
+<b class="fc">&nbsp;            SmallTimeframe smallTimeframe = new SmallTimeframe();</b>
+<b class="fc">&nbsp;            smallTimeframe.setAvailable(true);</b>
+<b class="fc">&nbsp;            smallTimeframe.setSubStartTime(bookingDTO.getTime());</b>
+<b class="fc">&nbsp;            smallTimeframe.setSubEndTime(appointment.getStartTime().plusMinutes(totalTime));</b>
+<b class="fc">&nbsp;            smallTimeframe.setTimeFrame(optionalTimeFrame.get());</b>
+&nbsp;
+<b class="fc">&nbsp;            timeFrame.addSmallTimeframe(smallTimeframe);</b>
+<b class="fc">&nbsp;            smallTimeFrameRepository.save(smallTimeframe);</b>
+&nbsp;
+&nbsp;        }
+<b class="fc">&nbsp;        appointment.setStatus(&quot;Approved&quot;);</b>
+<b class="fc">&nbsp;        int confirmCode = randomNumberService.generateRandomNumber(100000);</b>
+<b class="fc">&nbsp;        appointment.setConfirmationNumber(confirmCode);</b>
+&nbsp;
+&nbsp;//        int totalPrice = existingSer.stream()
+&nbsp;//                .mapToInt(Service::getPrice)      // get price
+&nbsp;//                .sum();                        // sum them
+&nbsp;//
+&nbsp;//        profileService.updateSpending(totalPrice, user.getId());
+&nbsp;
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        timeFrameRepository.save(timeFrame);</b>
+<b class="fc">&nbsp;        appointmentRepository.save(appointment);</b>
+<b class="fc">&nbsp;        appointmentServiceRepository.saveAll(appointmentServices);</b>
+&nbsp;
+&nbsp;        //sendEmailService.sendEmailWithHtml(user.getEmail(), &quot;Your NAILSYNC confirmation code&quot;, appointment.getConfirmationNumber());
+&nbsp;
+&nbsp;        try {
+&nbsp;            try {
+<b class="fc">&nbsp;                sendEmailService.sendEmailWithHtml(</b>
+<b class="fc">&nbsp;                        user.getEmail(),</b>
+&nbsp;                        &quot;Your NAILSYNC Confirmation Code&quot;,
+<b class="fc">&nbsp;                        appointment.getConfirmationNumber()</b>
+&nbsp;                );
+&nbsp;            } catch (jakarta.mail.MessagingException e) {
+<b class="nc">&nbsp;                throw new RuntimeException(e);</b>
+&nbsp;            }
+&nbsp;        } catch (MessagingException e) {
+<b class="nc">&nbsp;            e.printStackTrace();</b>
+&nbsp;        }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        return ResponseEntity.ok().body(new ResponseMessagge(&quot;Appointment booked successfully&quot;));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    @DeleteMapping(path = &quot;/cancel/{appointmentID}&quot;)
+&nbsp;    public ResponseEntity&lt;?&gt; cancelAppointment (@PathVariable Long appointmentID) {
+<b class="fc">&nbsp;        Optional&lt;Appointment&gt; confirm = appointmentRepository.findById(appointmentID);</b>
+<b class="fc">&nbsp;        if (confirm.isPresent()) {</b>
+<b class="fc">&nbsp;            appointmentRepository.delete(confirm.get());</b>
+<b class="fc">&nbsp;            appointmentServiceRepository.deleteById(confirm.get().getId());</b>
+<b class="fc">&nbsp;        return ResponseEntity.ok().body(new ResponseMessagge(&quot;Appointment canceled successfully&quot;));</b>
+&nbsp;    } else {
+<b class="fc">&nbsp;        return ResponseEntity.badRequest().body(new ResponseMessagge(&quot;Appointment not found&quot;));</b>
+&nbsp;
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    @PutMapping(path = &quot;/change/{appointmentId}/{date}/{time}&quot;)
+&nbsp;    public ResponseEntity&lt;?&gt; changeAppointment (@PathVariable Long appointmentId, @PathVariable LocalDate date, @PathVariable LocalTime time) {
+&nbsp;
+<b class="fc">&nbsp;        Optional&lt;Appointment&gt; appointmentOptional = appointmentRepository.findById(appointmentId);</b>
+<b class="fc">&nbsp;        if (appointmentOptional.isEmpty()) {</b>
+<b class="fc">&nbsp;            return ResponseEntity.badRequest().body(new ResponseMessagge(&quot;Couldn&#39;t find the appointment&quot;));</b>
+&nbsp;        }
+<b class="fc">&nbsp;        Appointment appointment = appointmentOptional.get();</b>
+&nbsp;
+<b class="fc">&nbsp;        LocalTime start = appointment.getStartTime();</b>
+<b class="fc">&nbsp;        LocalTime end = appointment.getEndTime();</b>
+&nbsp;
+<b class="fc">&nbsp;        Duration duration = Duration.between(start, end);</b>
+<b class="fc">&nbsp;        long minutes = duration.toMinutes(); // 90</b>
+&nbsp;        
+<b class="fc">&nbsp;        List&lt;AppointmentService&gt; appointmentService = appointmentServiceRepository.findByAppointmentId(appointmentId);</b>
+<b class="fc">&nbsp;        Employee employee1 = null;</b>
+<b class="fc">&nbsp;        for (AppointmentService employee: appointmentService) {</b>
+<b class="fc">&nbsp;            employee1 = employee.getEmployee();</b>
+&nbsp;            
+&nbsp;        }
+<b class="fc">&nbsp;        if (!timeframeService.checkTimeframe(</b>
+&nbsp;                employee1,
+&nbsp;                time,
+<b class="fc">&nbsp;                time.plusMinutes(minutes),</b>
+&nbsp;                date
+&nbsp;        )) {
+<b class="fc">&nbsp;            return ResponseEntity.badRequest().body(new ResponseMessagge(&quot;Conflicted hours&quot;));</b>
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        appointment.setDate(date);</b>
+<b class="fc">&nbsp;        appointment.setStartTime(time);</b>
+<b class="fc">&nbsp;        appointment.setEndTime(time.plusMinutes(minutes));</b>
+&nbsp;
+<b class="fc">&nbsp;        appointmentRepository.save(appointment);</b>
+&nbsp;
+<b class="fc">&nbsp;        return ResponseEntity.ok(new ResponseMessagge(&quot;Appointment updated successfully&quot;));</b>
+&nbsp;
+&nbsp;
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-05-08 04:06</div>
+</div>
+</body>
+</html>

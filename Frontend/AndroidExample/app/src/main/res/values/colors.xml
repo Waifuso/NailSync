@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#9C5DA5</color>
+    <color name="colorPrimaryDark">#7B4884</color>
+    <color name="colorAccent">#9C5DA5</color>
+
+    <color name="blue">#3F87F5</color>
+    <color name="green">#4CAF50</color>
+    <color name="red">#FF4750</color>
+    <color name="light_gray">#F5F5F5</color>
+    <color name="black">#212121</color>
+    <color name="white">#FFFFFF</color>
+
+    <color name="text_tertiary">#757575</color>
+
+    <!-- App specific colors -->
+    <color name="nail_pink">#FF8FB1</color>
+    <color name="nail_purple">#9C5DA5</color>
+    <color name="nail_light_purple">#D8BFD8</color>
+    <color name="nail_teal">#60D2E2</color>
+    <color name= "cream">#CCBCAF</color>
+
+    <color name="text_gray">#8A8A8A</color>
+    <!-- Other colors -->
+    <color name="textDarkPurple">#5D4962</color>
+    <color name="purple">#9C5DA5</color>
+    <color name="lightGray">#BDBDBD</color>
+
+    <!-- Added for service selection -->
+    <color name="light_purple">#F5E6FA</color>
+
+    <color name="colorError">#FF4750</color>
+    <color name="colorSuccess">#4CAF50</color>
+    <color name="colorWarning">#FFC107</color>
+    <color name="colorTextDark">#212121</color>
+    <color name="colorTextMedium">#757575</color>
+    <color name="colorTextLight">#9E9E9E</color>
+    <color name="colorBackground">#F8F8FA</color>
+
+    <color name="background_light">#F5F5F5</color>
+    <color name="selected_time_color">#9C5DA5</color>
+    <!-- Theme colors -->
+    <color name="purple_primary">#9C5DA5</color>
+    <color name="purple_dark">#7B4884</color>
+    <color name="purple_light">#F5E6FA</color>
+
+
+    <!-- Background colors -->
+    <color name="background">#F8F8FA</color>
+    <color name="nav_bar_color">#FFFFFF</color>
+
+
+    <!-- Text Colors -->
+    <color name="text_dark_purple">#533E85</color>
+    <!-- State colors -->
+    <color name="selected_time_bg">#E8D4F0</color>
+    <color name="unselected_time_bg">#FFFFFF</color>
+
+    <!-- Status colors -->
+    <color name="light_green">#E8F5E9</color>
+    <color name="orange">#FF9800</color>
+    <color name="light_orange">#FFF3E0</color>
+    <color name="light_red">#FFEBEE</color>
+    <color name="indigo">#3F51B5</color>
+    <color name="light_indigo">#E8EAF6</color>
+    <!-- Main Theme Colors -->
+    <color name="primary">#9C5DA5</color>                 <!-- Lilac Purple - main theme color -->
+    <color name="primary_dark">#7B4884</color>            <!-- Darker shade for status bar -->
+    <color name="primary_light">#F5E6FA</color>           <!-- Light shade for backgrounds -->
+    <color name="accent">#FF4081</color>                  <!-- Accent color (pink) -->
+
+    <!-- Text Colors -->
+    <color name="text_primary">#212121</color>            <!-- Primary text color (almost black) -->
+    <color name="text_secondary">#757575</color>          <!-- Secondary text color (dark gray) -->
+    <color name="text_hint">#9E9E9E</color>               <!-- Hint text color (medium gray) -->
+
+    <!-- Specialization Chip Colors -->
+    <color name="specialization_chip_bg">#F0E8F5</color>  <!-- Light purple background -->
+    <color name="specialization_chip_text">#212121</color> <!-- Dark text on chips -->
+
+    <!-- Appointment Status Colors -->
+    <color name="appointment_scheduled">#A47DAB</color>   <!-- Lilac Purple (matches theme) -->
+    <color name="appointment_checked_in">#4CAF50</color>  <!-- Green -->
+    <color name="appointment_in_progress">#2196F3</color> <!-- Blue -->
+    <color name="appointment_completed">#8BC34A</color>   <!-- Light Green -->
+    <color name="appointment_default">#9E9E9E</color>     <!-- Gray -->
+
+    <!-- Button Colors -->
+    <color name="button_primary">#A47DAB</color>          <!-- Primary button color -->
+    <color name="button_logout">#60D2E2</color>           <!-- Logout button color (teal) -->
+    <color name="button_danger">#FF4750</color>           <!-- Danger/delete button (red) -->
+
+    <!-- Bottom Navigation Colors -->
+    <color name="bottom_nav_selected">#A47DAB</color>     <!-- Selected icon/text in bottom nav -->
+    <color name="bottom_nav_unselected">#9E9E9E</color>   <!-- Unselected icon/text in bottom nav -->
+
+    <!-- Indicator Colors -->
+    <color name="warning_badge">#FFC107</color>           <!-- Yellow warning color -->
+    <color name="success">#4CAF50</color>                 <!-- Green success color -->
+
+
+    <!-- Chat UI Colors -->
+    <color name="chat_background">#FFFFFF</color>
+    <color name="message_outgoing">#9C5DA5</color>
+    <color name="message_incoming">#F0F0F0</color>
+
+    <color name="text_primary_white">#FFFFFF</color>
+
+    <color name="hint_color">#9E9E9E</color>
+    <color name="time_text">#9E9E9E</color>
+
+</resources>

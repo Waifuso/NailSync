@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!-- Rounded corners -->
+    <corners android:radius="28dp"/>
+
+    <!-- Disabled state color (typically a muted version of the primary color) -->
+    <solid android:color="#B3B3B3"/>
+
+    <!-- Optional: you can add stroke if you want a border -->
+    <stroke
+        android:width="0dp"
+        android:color="@android:color/transparent"/>
+</shape>

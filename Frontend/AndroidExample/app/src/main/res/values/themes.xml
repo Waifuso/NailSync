@@ -1,0 +1,25 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Base.Theme.AndroidExample" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Customize your light theme here. -->
+        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    </style>
+
+    <style name="Theme.AndroidExample" parent="Base.Theme.AndroidExample" />
+    <style name="Theme.AndroidExample.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+    <style name="Theme.AndroidExample.AppBarOverlay"
+        parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.AndroidExample.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- used tutorial found at https://www.youtube.com/watch?v=PZevTtJSCVw -->
+    <style name="RoundedRectangleXML" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="shapeAppearanceSmallComponent">@style/CornerRadius</item>
+    </style>
+    <style name="CornerRadius">
+        <item name="cornerSize">24dp</item>
+    </style>
+
+</resources>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="item_width">200dp</dimen>
+    <dimen name="app_bar_height">200dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+    <dimen name="container_margin">8dp</dimen>
+    <dimen name="container_horizontal_margin">16dp</dimen>
+
+    <dimen name="date_cell_height">32dp</dimen>
+    <dimen name="time_slot_corner_radius">8dp</dimen>
+
+    <dimen name="reward_card_width">200dp</dimen>
+    <dimen name="reward_card_height">180dp</dimen>
+    <dimen name="reward_card_margin">12dp</dimen>
+
+        <!-- Service item spacing -->
+        <dimen name="service_item_vertical_spacing">8dp</dimen>
+        <dimen name="service_item_horizontal_spacing">16dp</dimen>
+</resources>

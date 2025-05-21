@@ -1,0 +1,395 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > User_controller</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">phong.demo.Controller</a>
+</div>
+
+<h1>Coverage Summary for Class: User_controller (phong.demo.Controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Branch, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">User_controller</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    27.3%
+  </span>
+  <span class="absValue">
+    (3/11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    5.9%
+  </span>
+  <span class="absValue">
+    (2/34)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    16%
+  </span>
+  <span class="absValue">
+    (12/75)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package phong.demo.Controller;
+&nbsp;
+&nbsp;import jakarta.persistence.EntityNotFoundException;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.http.HttpStatus;
+&nbsp;import org.springframework.http.ResponseEntity;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;import phong.demo.DTO.JSOn_objectString;
+&nbsp;import phong.demo.Entity.Profile;
+&nbsp;import phong.demo.Entity.Ranking;
+&nbsp;import phong.demo.Entity.User;
+&nbsp;import phong.demo.Repository.EmployeeReposittory;
+&nbsp;import phong.demo.Repository.ProfileRepository;
+&nbsp;import phong.demo.Repository.UserRepository;
+&nbsp;import phong.demo.Service.ProfileService;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Optional;
+&nbsp;
+&nbsp;@RestController
+&nbsp;@RequestMapping(&quot;/api/users&quot;)
+<b class="fc">&nbsp;public class User_controller {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private  UserRepository userRepository;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private EmployeeReposittory employeeReposittory;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private ProfileRepository profileRepository;
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private ProfileService profileService;
+&nbsp;
+&nbsp;    @GetMapping(&quot;/Next/ranking/{id}&quot;)
+&nbsp;    public ResponseEntity&lt;?&gt; nextRanking(@PathVariable long id){
+&nbsp;
+<b class="fc">&nbsp;        Optional&lt;User&gt; Cur_user = userRepository.findById(id);</b>
+&nbsp;
+<b class="pc">&nbsp;        if (Cur_user.isEmpty()){</b>
+&nbsp;
+<b class="nc">&nbsp;            return ResponseEntity.notFound().build();</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        User user = Cur_user.get();</b>
+&nbsp;
+<b class="fc">&nbsp;        Integer spended = user.getTotalSpend();</b>
+&nbsp;
+<b class="fc">&nbsp;        String goal = profileService.nextRankingestimate(spended,user.getProfile().getRanking());</b>
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        return ResponseEntity.ok(goal);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    // Find people by Id
+&nbsp;    @GetMapping(&quot;/{id}&quot;)
+&nbsp;    public ResponseEntity&lt;User&gt; FindById(@PathVariable long id) {
+&nbsp;
+<b class="nc">&nbsp;        Optional&lt;User&gt; curUser = userRepository.findById(id);</b>
+&nbsp;
+<b class="nc">&nbsp;        if(curUser.isEmpty()){</b>
+&nbsp;
+<b class="nc">&nbsp;            return ResponseEntity.notFound().build();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        User user = curUser.get();</b>
+&nbsp;
+<b class="nc">&nbsp;        return ResponseEntity.ok(user);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // return the list of all people
+&nbsp;    @GetMapping(&quot;&quot;)
+&nbsp;    public List&lt;User&gt; Allpeople() {
+<b class="nc">&nbsp;        return userRepository.findAll();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    // find the user by the user name
+&nbsp;    @GetMapping(&quot;/username/{username}&quot;)
+&nbsp;    public ResponseEntity&lt;User&gt; findByName(@PathVariable String username) {
+&nbsp;
+<b class="nc">&nbsp;        Optional&lt;User&gt; curUser = userRepository.findByUsername(username);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (curUser.isEmpty()) {</b>
+&nbsp;
+<b class="nc">&nbsp;            return ResponseEntity.notFound().build();</b>
+&nbsp;        }
+<b class="nc">&nbsp;        User user = curUser.get();</b>
+&nbsp;
+<b class="nc">&nbsp;        return ResponseEntity.ok(user);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    // sign up
+&nbsp;    @PostMapping
+&nbsp;    public User CreateteUser(@RequestBody User user) {
+<b class="nc">&nbsp;        return userRepository.save(user);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    // Edit the user by there user name
+&nbsp;    @PutMapping(&quot;/{id}&quot;)
+&nbsp;    public ResponseEntity&lt;?&gt;EditUser(@PathVariable long id ,@RequestBody User Updateduser) {
+&nbsp;
+<b class="nc">&nbsp;        Optional&lt;User&gt; CurUser = userRepository.findById(id);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (CurUser.isEmpty()) {</b>
+&nbsp;
+<b class="nc">&nbsp;            return ResponseEntity.notFound().build();</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        User user = CurUser.get();</b>
+&nbsp;        //check if the Updatee&#39;s username is not null
+&nbsp;
+<b class="nc">&nbsp;        if(userRepository.existsByUsername(Updateduser.getUsername())){</b>
+&nbsp;
+<b class="nc">&nbsp;            return ResponseEntity.badRequest().body(new JSOn_objectString(&quot;The username has existed.&quot;));</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;//       //check if the Updatee&#39;s username is not null then set the username as the Update name
+<b class="nc">&nbsp;        if (Updateduser.getUsername() != null) {</b>
+<b class="nc">&nbsp;            user.setUsername(Updateduser.getUsername());</b>
+&nbsp;
+&nbsp;        }
+&nbsp;        // check if the Updatee&#39;s password is not null
+<b class="nc">&nbsp;        if (Updateduser.getPassword() != null) {</b>
+&nbsp;            // check if the current password is the same as the previous one
+<b class="nc">&nbsp;            if(user.getPassword().equals(Updateduser.getPassword())){</b>
+&nbsp;
+<b class="nc">&nbsp;                return ResponseEntity.badRequest().body(new JSOn_objectString(&quot;New password cannot be the same as the previous password.&quot;));</b>
+&nbsp;            }
+&nbsp;
+<b class="nc">&nbsp;            user.setPassword(Updateduser.getPassword());</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+&nbsp;        // check if the email has already been used or not
+&nbsp;
+<b class="nc">&nbsp;        if(userRepository.existsByEmail(Updateduser.getEmail())){</b>
+&nbsp;
+<b class="nc">&nbsp;            return ResponseEntity.badRequest().body(new JSOn_objectString(&quot; The email has already existed&quot;));</b>
+&nbsp;        }
+&nbsp;
+&nbsp;
+&nbsp;        // check if  the email is not null then set the email as request
+<b class="nc">&nbsp;        if (Updateduser.getEmail() != null) {</b>
+&nbsp;
+<b class="nc">&nbsp;            user.setEmail(Updateduser.getEmail());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        User Saveduser = userRepository.save(user);</b>
+&nbsp;
+<b class="nc">&nbsp;        return ResponseEntity.ok(new JSOn_objectString(&quot;Success&quot;));</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    @GetMapping(&quot;/Profile/{id}&quot;)
+&nbsp;    public  ResponseEntity&lt;?&gt;GetProfile(@PathVariable long id){
+<b class="fc">&nbsp;        Optional&lt;User&gt; Cur_user = userRepository.findById(id);</b>
+&nbsp;
+<b class="pc">&nbsp;        if (Cur_user.isEmpty()){</b>
+&nbsp;
+<b class="nc">&nbsp;            return ResponseEntity.notFound().build();</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        User user = Cur_user.get();</b>
+&nbsp;
+<b class="fc">&nbsp;        Profile profile = user.getProfile();</b>
+&nbsp;
+<b class="fc">&nbsp;        return ResponseEntity.ok(profile);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    //create the profile
+&nbsp;    @PostMapping(&quot;/Profile/create/{id}&quot;)
+&nbsp;
+&nbsp;    public ResponseEntity&lt;?&gt; createProfile(@PathVariable long id,@RequestBody Profile updateProfile){
+&nbsp;
+<b class="nc">&nbsp;        Optional&lt;User&gt; Cur_user = userRepository.findById(id);</b>
+&nbsp;
+<b class="nc">&nbsp;        if (Cur_user.isEmpty()){</b>
+&nbsp;
+<b class="nc">&nbsp;            return ResponseEntity.notFound().build();</b>
+&nbsp;
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        User user = Cur_user.get();</b>
+&nbsp;
+<b class="nc">&nbsp;        Profile profile = new Profile();</b>
+&nbsp;
+<b class="nc">&nbsp;        if(updateProfile == null){</b>
+&nbsp;
+<b class="nc">&nbsp;            return ResponseEntity.badRequest().body(&quot; the profile is null&quot;);</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if(profileRepository.existsByPhone(updateProfile.getPhone())){</b>
+&nbsp;
+<b class="nc">&nbsp;            return ResponseEntity.badRequest().body(new JSOn_objectString(&quot; the phone number of the profile has already exist&quot;));</b>
+&nbsp;        }
+&nbsp;        // check if the phone number is not null then set it to the phone number of the user
+<b class="nc">&nbsp;        if (updateProfile.getPhone()!= null ){</b>
+&nbsp;
+<b class="nc">&nbsp;            profile.setPhone(updateProfile.getPhone());</b>
+&nbsp;        }
+&nbsp;        // check if the first name is not null then set it to the first name  of the user
+<b class="nc">&nbsp;        if (updateProfile.getFirstName()!= null){</b>
+&nbsp;
+<b class="nc">&nbsp;            profile.setFirstName(updateProfile.getFirstName());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        if(updateProfile.getLastName()!= null){</b>
+&nbsp;
+<b class="nc">&nbsp;            profile.setLastName(updateProfile.getLastName());</b>
+&nbsp;        }
+&nbsp;
+<b class="nc">&nbsp;        Ranking ranking = profileService.estimateRanking(user.getId());</b>
+&nbsp;
+<b class="nc">&nbsp;        profile.setRanking(ranking);</b>
+&nbsp;
+<b class="nc">&nbsp;        profile.setUser(user);</b>
+&nbsp;
+<b class="nc">&nbsp;        user.setProfile(profile);</b>
+&nbsp;
+<b class="nc">&nbsp;       Profile saveProfile =  profileRepository.save(profile);</b>
+&nbsp;
+<b class="nc">&nbsp;        return ResponseEntity.ok(new JSOn_objectString(&quot;Successfully save the profile&quot;));</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    // update the profile money amount
+&nbsp;    // check the id then update the amount of the money straight to the Total balance
+&nbsp;    @PutMapping(&quot;/Test/id/{id}/money/{money}&quot;)
+&nbsp;    public ResponseEntity&lt;?&gt;testUpdate(@PathVariable long id,@PathVariable Integer money){
+&nbsp;
+<b class="nc">&nbsp;       Optional&lt;Profile&gt; Cur_profile = profileRepository.findById(id);</b>
+&nbsp;
+<b class="nc">&nbsp;       Profile profile = Cur_profile.get();</b>
+&nbsp;
+&nbsp;        try {
+<b class="nc">&nbsp;            profileService.updateSpending(money,id);</b>
+&nbsp;
+<b class="nc">&nbsp;            Ranking ranking = profileService.estimateRanking(id);</b>
+&nbsp;
+<b class="nc">&nbsp;            profile.setRanking(ranking);</b>
+&nbsp;
+<b class="nc">&nbsp;            Profile profile1 = profileRepository.save(profile);</b>
+&nbsp;
+<b class="nc">&nbsp;            return  ResponseEntity.ok(&quot;Successfully&quot;);</b>
+<b class="nc">&nbsp;        } catch (EntityNotFoundException e) {</b>
+&nbsp;
+<b class="nc">&nbsp;            return  ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());</b>
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    @DeleteMapping(&quot;/{id}&quot;)
+&nbsp;
+&nbsp;    public void Deleteprofile(@PathVariable long id){
+&nbsp;
+<b class="nc">&nbsp;        profileRepository.deleteById(id);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-04-20 21:14</div>
+</div>
+</body>
+</html>

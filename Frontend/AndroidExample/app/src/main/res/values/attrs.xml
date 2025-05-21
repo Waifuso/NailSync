@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Custom attributes for RewardCardView -->
+    <declare-styleable name="RewardCardView">
+        <attr name="rewardTitle" format="string" />
+        <attr name="rewardDescription" format="string" />
+        <attr name="pointsText" format="string" />
+        <attr name="rewardImage" format="reference" />
+    </declare-styleable>
+
+    <!-- You may already have these dimension values defined elsewhere -->
+    <dimen name="card_corner_radius">12dp</dimen>
+    <dimen name="card_elevation">3dp</dimen>
+</resources>

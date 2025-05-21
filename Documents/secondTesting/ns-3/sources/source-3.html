@@ -1,0 +1,145 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+  <title>Coverage Report > ChatBotController</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">phong.demo.Controller</a>
+</div>
+
+<h1>Coverage Summary for Class: ChatBotController (phong.demo.Controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ChatBotController</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    66.7%
+  </span>
+  <span class="absValue">
+    (2/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    62.5%
+  </span>
+  <span class="absValue">
+    (5/8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package phong.demo.Controller;
+&nbsp;
+&nbsp;import com.mysql.cj.xdevapi.JsonString;
+&nbsp;import org.springframework.beans.factory.annotation.Autowired;
+&nbsp;import org.springframework.http.HttpStatus;
+&nbsp;import org.springframework.http.ResponseEntity;
+&nbsp;import org.springframework.web.bind.annotation.*;
+&nbsp;import phong.demo.DTO.JSOn_objectString;
+&nbsp;import phong.demo.Service.ChatGptService;
+&nbsp;
+&nbsp;import reactor.core.publisher.Mono;
+&nbsp;
+&nbsp;@RestController
+&nbsp;@RequestMapping(&quot;/api/chatBot&quot;)
+<b class="fc">&nbsp;public class ChatBotController {</b>
+&nbsp;
+&nbsp;    @Autowired
+&nbsp;    private ChatGptService chatGptService;
+&nbsp;
+&nbsp;    /**
+&nbsp;     * Example:
+&nbsp;     * POST /api/chatBot/ask
+&nbsp;     */
+&nbsp;    @PostMapping(&quot;/ask/{id}&quot;)
+&nbsp;    public Mono&lt;ResponseEntity&lt;JSOn_objectString&gt;&gt; ask(@RequestBody String question, @PathVariable long id ) {
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;        return chatGptService.sendMessage(question,id)</b>
+&nbsp;                // Wrap the reply in 200 OK
+<b class="fc">&nbsp;                .map(reply -&gt; ResponseEntity.ok(new JSOn_objectString(reply)))</b>
+<b class="fc">&nbsp;                .defaultIfEmpty(ResponseEntity.noContent().build()) // no content return 204</b>
+&nbsp;                // On error, return 500 with the exception message
+<b class="fc">&nbsp;                .onErrorResume(ex -&gt;</b>
+<b class="nc">&nbsp;                        Mono.just(ResponseEntity</b>
+<b class="nc">&nbsp;                                .status(HttpStatus.INTERNAL_SERVER_ERROR)</b>
+<b class="nc">&nbsp;                                .body(new JSOn_objectString(&quot;Error: &quot; + ex.getMessage()))</b>
+&nbsp;                        )
+&nbsp;                );
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2025-05-08 04:06</div>
+</div>
+</body>
+</html>
