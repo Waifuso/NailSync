@@ -2,8 +2,9 @@
 
 Link to video --> https://www.youtube.com/watch?v=LnRssPj8cIk&list=PL6BdlkdKLEB__zBDNSki_OcKhINyXpi2u&index=41&ab_channel=JordanNguyen
 
-An Android application for a nail salon booking system, featuring separate interfaces for customers and employees. Built with Java, Volley, and Material Components. 
+An Android application for a nail salon booking system, featuring separate interfaces for customers and employees. Built with Java, Android Volley, WebSocets, and XML.
 
+Used S3 buckets, mediapipe handlandmarker model, and springboot framework.
 ## Features
 
 ### Customer Flow
