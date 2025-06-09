@@ -10,7 +10,7 @@ An Android application for a nail salon booking system, featuring separate inter
 * **Backend** - SpringBoot, Java, and AWS S3 
 
 
-## I worked on FrontEnd, this is techstack I used mroe indepth
+## I worked on Frontend, this is techstack I used more indepth
 
 * **Language**: Java
 * **Network**: Volley for HTTP requests and JSON parsing
