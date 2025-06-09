@@ -5,12 +5,12 @@ Link to video --> https://www.youtube.com/watch?v=LnRssPj8cIk&list=PL6BdlkdKLEB_
 
 An Android application for a nail salon booking system, featuring separate interfaces for customers and employees. Built with Java, Android Volley, WebSocets, and XML.
 
-Core technologies:
-Frontend - Java, XML, and Google Mediapipe Landhandmarker
-Backend - SpringBoot, Java, and AWS S3 
+## Core technologies:
+* **Frontend** - Java, XML, and Google Mediapipe Landhandmarker
+* **Backend** - SpringBoot, Java, and AWS S3 
 
 
-## I worked on FrontEnd, this is tech I used
+## I worked on FrontEnd, this is techstack I used mroe indepth
 
 * **Language**: Java
 * **Network**: Volley for HTTP requests and JSON parsing
